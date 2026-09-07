@@ -6,10 +6,11 @@ import { PrismaModule } from './prisma/prisma.module';
 import { PostModule } from './post/post.module';
 import { ModelsModule } from './models/models.module';
 import { PromptsModule } from './prompts/prompts.module';
+import { ChainsModule } from './chains/chains.module';
 
 
 @Module({
-  imports: [UserModule, PrismaModule, PostModule, ModelsModule, PromptsModule],
+  imports: [UserModule, PrismaModule, PostModule, ModelsModule, PromptsModule, ChainsModule],
   controllers: [AppController],
   providers: [AppService],
 })
