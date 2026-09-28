@@ -7,10 +7,12 @@ import { PostModule } from './post/post.module';
 import { ModelsModule } from './models/models.module';
 import { PromptsModule } from './prompts/prompts.module';
 import { ChainsModule } from './chains/chains.module';
+import { McpClientModule } from './mcp-client/mcp-client.module';
+import { McpAgentModule } from './mcp-agent/mcp-agent.module';
 
 
 @Module({
-  imports: [UserModule, PrismaModule, PostModule, ModelsModule, PromptsModule, ChainsModule],
+  imports: [UserModule, PrismaModule, PostModule, ModelsModule, PromptsModule, ChainsModule, McpClientModule, McpAgentModule],
   controllers: [AppController],
   providers: [AppService],
 })
