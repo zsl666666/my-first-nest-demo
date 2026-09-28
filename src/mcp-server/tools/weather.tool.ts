@@ -10,6 +10,6 @@ interface WeatherDataItemObj {
 
 type City = "北京" | "上海" | "广州" | "深圳" | "杭州";
 
-export const handleWeatherQuery = (args: any): Promise<string> => {
+export const handleWeatherQuery = (args: any): any => {
 
 }
