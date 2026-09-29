@@ -11,4 +11,12 @@ export class LanggraphController {
       return { answer };
     });
   }
+
+  // 有记忆简单问答
+  @Post('memory-chat')
+  memoryChat(@Body() body: { message: string, threadId: string }) {
+    return this.langgraphService.memoryChat(body.message, body.threadId).then(answer => {
+      return { answer };
+    });
+  }
 }
