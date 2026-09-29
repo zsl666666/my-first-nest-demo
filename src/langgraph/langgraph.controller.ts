@@ -1,9 +1,15 @@
 import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import { LanggraphService } from './langgraph.service';
+import { ArticleService } from './article.service';
 
 @Controller('langgraph')
 export class LanggraphController {
-  constructor(private readonly langgraphService: LanggraphService) {}
+  constructor(
+    private readonly langgraphService: LanggraphService,
+    private readonly articleService: ArticleService
+  ) {}
+
+
   // 在这里可以添加处理请求的方法，例如 GET、POST 等
   @Post('simple-chat')
   simpleChat(@Body() body: { message: string }) {
@@ -24,5 +30,11 @@ export class LanggraphController {
   @Get('history/:threadId')
   getHistory(@Param('threadId') threadId: string) {
     return this.langgraphService.getHistory(threadId);
+  }
+
+  // 文章摘要工作流
+  @Post('article')
+  processArticle(@Body() body: { article: string }) {
+    return this.articleService.processArticle(body.article);
   }
 }
