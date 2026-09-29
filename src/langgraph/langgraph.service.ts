@@ -89,4 +89,18 @@ export class LanggraphService implements OnModuleInit {
     return (result?.messages.at(-1)?.content as string) ?? '';
   }
 
+  // 获取对话历史
+  async getHistory(threadId: string) {
+    if (!this.memoryGraph) {
+      throw new Error('LangGraph 尚未初始化');
+    }
+    const result = await this.memoryGraph.getState({ configurable: { thread_id: threadId } });
+
+    const state = result.values as Partial<typeof MessagesAnnotation.State>;
+    return (state.messages ?? []).map((item) => ({
+      type: item.type === 'human' ? 'user' : 'assistant',
+      content: item.content,
+    }))
+  }
+
 }

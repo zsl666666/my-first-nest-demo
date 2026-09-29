@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import { LanggraphService } from './langgraph.service';
 
 @Controller('langgraph')
@@ -18,5 +18,11 @@ export class LanggraphController {
     return this.langgraphService.memoryChat(body.message, body.threadId).then(answer => {
       return { answer };
     });
+  }
+
+  // 获取对话历史
+  @Get('history/:threadId')
+  getHistory(@Param('threadId') threadId: string) {
+    return this.langgraphService.getHistory(threadId);
   }
 }
