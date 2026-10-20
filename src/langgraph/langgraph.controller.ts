@@ -1,12 +1,14 @@
 import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import { LanggraphService } from './langgraph.service';
 import { ArticleService } from './article.service';
+import { ReactAgentService } from './react-agent.service';
 
 @Controller('langgraph')
 export class LanggraphController {
   constructor(
     private readonly langgraphService: LanggraphService,
-    private readonly articleService: ArticleService
+    private readonly articleService: ArticleService,
+    private readonly reactAgentService: ReactAgentService
   ) {}
 
 
@@ -36,5 +38,12 @@ export class LanggraphController {
   @Post('article')
   processArticle(@Body() body: { article: string }) {
     return this.articleService.processArticle(body.article);
+  }
+
+  @Post('react-agent')
+  reactChat(@Body() body: { threadId: string, message: string }) {
+    return this.reactAgentService.chat({ threadId: body.threadId, message: body.message }).then(answer => {
+      return { answer };
+    });
   }
 }
