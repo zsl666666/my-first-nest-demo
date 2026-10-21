@@ -3,6 +3,7 @@ import { LanggraphService } from './langgraph.service';
 import { ArticleService } from './article.service';
 import { ReactAgentService } from './react-agent.service';
 import { RoutingService } from './routing.service';
+import { ParallelService } from './parallel.service';
 
 @Controller('langgraph')
 export class LanggraphController {
@@ -10,7 +11,8 @@ export class LanggraphController {
     private readonly langgraphService: LanggraphService,
     private readonly articleService: ArticleService,
     private readonly reactAgentService: ReactAgentService,
-    private readonly routingService: RoutingService
+    private readonly routingService: RoutingService,
+    private readonly parallelService: ParallelService
   ) {}
 
 
@@ -54,5 +56,11 @@ export class LanggraphController {
   @Post('route')
   routeChat(@Body() body: {userInput: string }) {
       return this.routingService.routeChat(body.userInput);
+  }
+
+  // 并行工作流
+  @Post('parallel')
+  parallelChat(@Body() body: { task: string }) {
+    return this.parallelService.parallelChat(body.task)
   }
 }
